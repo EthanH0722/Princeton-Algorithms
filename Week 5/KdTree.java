@@ -26,10 +26,6 @@ public class KdTree {
         size = 0;
     }
 
-    /**
-     * insert p into tree
-     * @param p
-     */
     public void insert(Point2D p) {
         checkNull(p);
         if (contains(p)) { return; }
@@ -76,21 +72,11 @@ public class KdTree {
         }
     }
 
-    /**
-     * @param rect
-     * @return points inside of the given rect
-     */
     public Iterable<Point2D> range(RectHV rect){
         checkNull(rect);
         return searchRange(root, new ArrayList <>(), rect);
     }
-
-    /**
-     * @param startNode
-     * @param list
-     * @param rect
-     * @return the list of points inside of the rect
-     */
+	
     private ArrayList<Point2D> searchRange(Node startNode, ArrayList<Point2D> list, RectHV rect) {
         if (startNode!=null) {
             if (rect.contains(startNode.p)) {
@@ -106,10 +92,6 @@ public class KdTree {
         } return list;
     }
 
-    /**
-     * @param p
-     * @return nearest point to the given point
-     */
     public Point2D nearest(Point2D p) {
         checkNull(p);
         return isEmpty() ? null : searchNearest(root, p, root).p;
@@ -131,19 +113,10 @@ public class KdTree {
         } return nearest;
     }
 
-    /**
-     * throw exception if given object is null
-     * @param o
-     */
     private void checkNull(Object o) {
         if (o==null) { throw new IllegalArgumentException(); }
     }
 
-    /**
-     *
-     * @param p
-     * @return true if the given point is included in the tree otherwise false
-     */
     public boolean contains(Point2D p) {
         checkNull(p);
         Node curr = root;
@@ -154,16 +127,8 @@ public class KdTree {
         } return false;
     }
 
-    /**
-     *
-     * @return true if tree is empty otherwise false
-     */
     public boolean isEmpty() { return root == null; }
 
-    /**
-     *
-     * @return size of the tree
-     */
     public int size() { return size; }
 
     @Override
